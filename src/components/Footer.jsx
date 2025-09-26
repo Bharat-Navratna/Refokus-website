@@ -10,11 +10,11 @@ function Footer() {
         <div className="basis-1/2 flex gap-4">
         <div className="basis-1/3">
             <h4 className="mb-10 text-zinc-500">Socials</h4>
-            {["Instagram", "Twitter (X?)", "LinkedIn"].map((item, index) => <a className="block mt-3 text-zinc-600">{item}</a>)}
+            {["Instagram", "Twitter (X?)", "LinkedIn"].map((item, index) => <a key={index} className="block mt-3 text-zinc-600">{item}</a>)}
         </div>
         <div className="basis-1/3">
             <h4 className="mb-10 text-zinc-500">Sitemap</h4>
-            {["Home", "Work", "Careers", "Contact"].map((item, index) => <a className="block mt-3">{item}</a>)}
+            {["Home", "Work", "Careers", "Contact"].map((item, index) => <a key={index} className="block mt-3">{item}</a>)}
         </div>
         <div className="basis-1/2 flex flex-col items-end">
             <p className="text-right">Refokus is a pioneering digital agency driven by design and empowered by technology.</p>

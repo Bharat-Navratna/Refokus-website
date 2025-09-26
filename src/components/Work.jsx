@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
 
 function Work() {
-  const images = [
+  const [images, setImages] = useState([
     {
       url: "https://cdn.prod.website-files.com/664dc8b6bc52b504509197f0/6697d713cb10965e8dbdee18_YIR%202021%20-%204%203.webp",
       top: "50%",
@@ -38,7 +39,45 @@ function Work() {
       left: "55%",
       isActive: false,
     },
-  ];
+  ]);
+
+  const { scrollYProgress } = useScroll();
+
+  scrollYProgress.on("change", (data) => {
+    function imagesShow(arr) {
+      setImages((prev) =>
+        prev.map((item, index) =>
+          arr.indexOf(index) === -1
+            ? { ...item, isActive: false }
+            : { ...item, isActive: true }
+        )
+      );
+    }
+
+    switch (Math.floor(data * 100)) {
+      case 0:
+        imagesShow([]);
+        break;
+      case 1:
+        imagesShow([0]);
+        break;
+      case 2:
+        imagesShow([0, 1]);
+        break;
+      case 3:
+        imagesShow([0, 1, 2]);
+        break;
+      case 4:
+        imagesShow([0, 1, 2, 3]);
+        break;
+      case 5:
+        imagesShow([0, 1, 2, 3, 4]);
+        break;
+      case 6:
+        imagesShow([0, 1, 2, 3, 4, 5]);
+        break;
+    }
+  });
 
   return (
     <div className="w-full mt-10">
@@ -51,6 +90,7 @@ function Work() {
             (elem, index) =>
               elem.isActive && (
                 <img
+                  key={index}
                   className="absolute w-60 rounded-lg -translate-x-[50%] -translate-y-[50%]"
                   src={elem.url}
                   style={{ top: elem.top, left: elem.left }}
